@@ -50,25 +50,25 @@ export default function ItemList() {
     return (
         <div>
             <form className="itemForm" onSubmit={handleFormSubmit}>
-                <label htmlFor="itemName">Item Name:</label>
+                <label>Item Name:</label>
                 <input type="text" id="itemName" name="itemName" value={itemName}
                     onChange={(e) => setItemName(e.target.value)}
                     required
                 />
 
-                <label htmlFor="description">Description:</label>
+                <label>Description:</label>
                 <textarea id="description" name="description" value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     required>
                 </textarea>
 
-                <label htmlFor="price">Price:</label>
+                <label>Price:</label>
                 <input type="number" id="price" name="price" value={price}
                     onChange={(e) => setPrice(e.target.value)}
                     required
                 />
 
-                <label htmlFor="imageUrl">Image URL:</label>
+                <label>Image URL:</label>
                 <input type="text" id="imageUrl" name="imageUrl" value={imageUrl}
                     onChange={(e) => setImageUrl(e.target.value)}
                     required

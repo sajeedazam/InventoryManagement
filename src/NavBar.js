@@ -4,6 +4,7 @@ export default function NavBar({ setCurrentPage }) {
     const handleClick = (page) => {
         setCurrentPage(page);
     };
+    
     return (
         <nav className="navbar">
             <ul >            

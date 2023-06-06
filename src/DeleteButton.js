@@ -1,4 +1,5 @@
 export default function ItemDeleteButton({ item, onDelete }) {
+    // event handler 
     const handleDelete = () => {
         onDelete(item);
     };
