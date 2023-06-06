@@ -1,0 +1,15 @@
+.about-container {
+    margin-top: 0;
+    padding: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.about-container h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 5%;
+}
+
+.about-container p {
+    font-size: 16px;
+}

@@ -1,0 +1,11 @@
+.home-description {
+    margin-top: 0;
+    padding: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.home-description h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 5%;
+}

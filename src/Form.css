@@ -1,0 +1,72 @@
+.itemForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.itemForm label {
+    font-weight: bold;
+}
+
+.itemForm input,
+.itemForm textarea {
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.itemForm button {
+    margin-top: 10px;
+}
+
+.addedItems {
+    list-style: none;
+    padding: 0;
+}
+
+.addedItems li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.addedItems img {
+    margin-right: 10px;
+}
+
+.addedItems strong {
+    margin-right: 10px;
+}
+
+.viewDetailsButton { 
+    margin-right: 10px;
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.deleteButton {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+#submit-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+#clear-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
