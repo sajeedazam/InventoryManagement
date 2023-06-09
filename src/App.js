@@ -4,7 +4,7 @@ import About from './About';
 import { useState } from 'react';
 
 
-// help from chatgpt
+
 export default function App() {
     const [currentPage, setCurrentPage] = useState('home');
 

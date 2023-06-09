@@ -1,10 +1,16 @@
-export default function ItemDeleteButton({ item, onDelete }) {
-    // event handler 
+import { useDispatch } from 'react-redux';
+import { deleteItem } from './actions';
+
+export default function ItemDeleteButton({ item }) {
+    const dispatch = useDispatch();
+
     const handleDelete = () => {
-        onDelete(item);
+        dispatch(deleteItem(item));
     };
 
     return (
-        <button className="deleteButton" onClick={handleDelete}>Delete Item</button>
+        <button className="deleteButton" onClick={handleDelete}>
+            Delete Item
+        </button>
     );
 }

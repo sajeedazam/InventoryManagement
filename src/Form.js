@@ -1,15 +1,14 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteItem, addItem } from './actions';
 import ItemDetail from './PopUp';
 import ItemDeleteButton from './DeleteButton';
 import './Form.css';
 
-const initialItems = [
-    { name: 'Hammer', description: 'Steel head and wooden handle hammer', price: 15, imageUrl: "https://th.bing.com/th/id/R.08d4c4232ad5c3b152835810d8339de9?rik=wAKL6zkubUbHMg&pid=ImgRaw&r=0" },
-    { name: 'Pliers', description: 'For gripping objects', price: 15, imageUrl: 'https://cdn4.iconfinder.com/data/icons/construction-and-building-1/128/13-1024.png' },
-];
-
 export default function ItemList() {
-    const [items, setItems] = useState(initialItems);
+    const dispatch = useDispatch();
+    const items = useSelector(state => state.items.items);
+
     const [itemName, setItemName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
@@ -17,7 +16,7 @@ export default function ItemList() {
     const [selectedItem, setSelectedItem] = useState(null);
 
     const handleDeleteItem = (item) => {
-        setItems((prevItems) => prevItems.filter((prevItem) => prevItem !== item));
+        dispatch(deleteItem(item));
         setSelectedItem(null);
     };
 
@@ -32,7 +31,7 @@ export default function ItemList() {
         };
 
         // Update the items list
-        setItems((prevItems) => [...prevItems, newItem]);
+        dispatch(addItem(newItem));
 
         setItemName('');
         setDescription('');
