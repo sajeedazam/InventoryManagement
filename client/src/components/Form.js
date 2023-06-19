@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteItem, addItem } from './actions';
+import { deleteItem, addItem } from '../actions';
 import ItemDetail from './PopUp';
 import ItemDeleteButton from './DeleteButton';
 import './Form.css';

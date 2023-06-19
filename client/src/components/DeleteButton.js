@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { deleteItem } from './actions';
+import { deleteItem } from '../actions';
 
 export default function ItemDeleteButton({ item }) {
     const dispatch = useDispatch();
