@@ -1,14 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
+import { getItemsAsync } from './thunks';
+
 
 const INITIAL_STATE = {
-    items: [
-        { id: 1, name: 'Hammer', description: 'Steel head and wooden handle hammer', price: 15, imageUrl: "https://th.bing.com/th/id/R.08d4c4232ad5c3b152835810d8339de9?rik=wAKL6zkubUbHMg&pid=ImgRaw&r=0" },
-        { id: 2, name: 'Pliers', description: 'For gripping objects', price: 15, imageUrl: 'https://cdn4.iconfinder.com/data/icons/construction-and-building-1/128/13-1024.png' },
-    ],
+    items: [],
 };
 
-const itemReducer = createSlice({
+const itemSlice = createSlice({
   name: 'items',
   initialState: INITIAL_STATE,
   reducers: {
@@ -21,8 +20,14 @@ const itemReducer = createSlice({
         state.items = state.items.filter(item => item.id !== itemId);
     }
   },
+  extraReducers: (builder) => {
+    builder
+        .addCase(getItemsAsync.fulfilled, (state, action) => {
+            state.items = action.payload
+        })
+  }
 });
 
 
-export const { addItem, deleteItem } = itemReducer.actions;
-export default itemReducer.reducer;
+export const { addItem, deleteItem } = itemSlice.actions;
+export default itemSlice.reducer;

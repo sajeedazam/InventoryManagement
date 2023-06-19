@@ -1,13 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../redux/items/reducer';
 import ItemDetail from './PopUp';
 import ItemDeleteButton from './DeleteButton';
+import { getItemsAsync } from '../redux/items/thunks';
 import './Form.css';
 
 export default function ItemList() {
     const dispatch = useDispatch();
     const items = useSelector(state => state.items.items);
+
+    useEffect(() => {
+        dispatch(getItemsAsync());
+    }, []);
 
     const [itemName, setItemName] = useState('');
     const [description, setDescription] = useState('');
