@@ -3,8 +3,6 @@ import Home from './components/Home';
 import About from './components/About';
 import { useState } from 'react';
 
-
-
 export default function App() {
     const [currentPage, setCurrentPage] = useState('home');
 
