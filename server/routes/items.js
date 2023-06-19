@@ -21,4 +21,14 @@ router.get('/:itemId', function (req, res, next) {
   return res.send(foundItem);
 });
 
+router.post('/', function (req, res, next) {
+  if (!req.body.name || !req.body.description || !req.body.price || !req.body.imageUrl) {
+    return res.status(400).send({ message: 'Fill all fields!' })
+  }
+ 
+  const item = { id: uuid(), name: req.body.name, description: req.body.description, price: req.body.price, imageUrl: req.body.imageUrl };
+  items.push(item);
+  return res.send(item);
+});
+
 module.exports = router;

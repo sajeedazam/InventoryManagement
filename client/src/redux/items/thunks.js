@@ -7,3 +7,10 @@ export const getItemsAsync = createAsyncThunk(
         return await ItemService.getItems();
     }
 );
+
+export const addItemAsync = createAsyncThunk(
+    'ADD_ITEM',
+    async (item) => {
+      return await ItemService.addItem(item.name, item.description, item.price, item.imageUrl);
+    }
+);

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
-import { getItemsAsync } from './thunks';
+import { getItemsAsync, addItemAsync } from './thunks';
 
 
 const INITIAL_STATE = {
@@ -24,6 +24,9 @@ const itemSlice = createSlice({
     builder
         .addCase(getItemsAsync.fulfilled, (state, action) => {
             state.items = action.payload
+        })
+        .addCase(addItemAsync.fulfilled, (state, action) => {
+            state.items.push(action.payload);
         })
   }
 });

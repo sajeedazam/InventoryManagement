@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../redux/items/reducer';
 import ItemDetail from './PopUp';
 import ItemDeleteButton from './DeleteButton';
-import { getItemsAsync } from '../redux/items/thunks';
+import { getItemsAsync, addItemAsync } from '../redux/items/thunks';
 import './Form.css';
+// const { v4: uuid } = require('uuid');
 
 export default function ItemList() {
     const dispatch = useDispatch();
@@ -24,6 +25,7 @@ export default function ItemList() {
         e.preventDefault();
 
         const newItem = {
+            // id: uuid,
             name: itemName,
             description: description,
             price: price,
@@ -31,7 +33,7 @@ export default function ItemList() {
         };
 
         // Update the items list
-        dispatch(addItem(newItem));
+        dispatch(addItemAsync(newItem));
 
         setItemName('');
         setDescription('');
