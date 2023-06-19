@@ -11,13 +11,21 @@ export const getItemsAsync = createAsyncThunk(
 export const addItemAsync = createAsyncThunk(
     'ADD_ITEM',
     async (item) => {
-      return await ItemService.addItem(item.name, item.description, item.price, item.imageUrl);
+        return await ItemService.addItem(item.name, item.description, item.price, item.imageUrl);
     }
 );
 
 export const deleteItemAsync = createAsyncThunk(
     'DELETE_ITEM',
     async (itemId) => {
-      return await ItemService.deleteItem(itemId);
+        return await ItemService.deleteItem(itemId);
+    }
+);
+
+export const editItemAsync = createAsyncThunk(
+    'EDIT_ITEM',
+    async ({ itemId, description }) => {
+        const response = await ItemService.editItem(itemId, description);
+        return response;
     }
 );

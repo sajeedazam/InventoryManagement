@@ -88,7 +88,7 @@ export default function ItemList() {
                         <img src={item.imageUrl} width="50" />
                         <strong> {item.name} </strong>
                         <button className="viewDetailsButton" onClick={() => setSelectedItem(item)}>View Details</button>
-                        <ItemDeleteButton item={item}/>
+                        <ItemDeleteButton item={item} />
                     </li>
                 ))}
             </ul>
