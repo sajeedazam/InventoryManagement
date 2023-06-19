@@ -1,11 +1,12 @@
 import { useDispatch } from 'react-redux';
-import { deleteItem } from '../redux/items/reducer';
+// import { deleteItem } from '../redux/items/reducer';
+import { deleteItemAsync } from '../redux/items/thunks';
 
 export default function ItemDeleteButton({ item }) {
     const dispatch = useDispatch();
 
     const handleDelete = () => {
-        dispatch(deleteItem(item));
+        dispatch(deleteItemAsync(item.id));
     };
 
     return (

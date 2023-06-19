@@ -25,7 +25,23 @@ const addItem = async (name, description, price, imageUrl) => {
     return data;
 };
 
+const deleteItem = async (itemId) => {
+    const response = await fetch(`http://localhost:3001/items/${itemId}`, {
+        method: 'DELETE'
+    });
+
+    const data = await response.json();
+    if (!response.ok) {
+      const errorMsg = data?.message;
+      throw new Error(errorMsg);
+    }
+  
+    return data;
+
+}
+
 export default {
     getItems,
-    addItem
+    addItem,
+    deleteItem
 };

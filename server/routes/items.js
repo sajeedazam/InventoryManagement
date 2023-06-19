@@ -31,4 +31,16 @@ router.post('/', function (req, res, next) {
   return res.send(item);
 });
 
+router.delete('/:itemId', function (req, res, next) {
+  const itemId = req.params.itemId;
+  const deletedItem = items.find(item => item.id === itemId);
+
+  if (!deletedItem) {
+    return res.status(404).send({ message: 'Item not found' });
+  }
+
+  items = items.filter(item => item.id !== itemId);
+  return res.send(deletedItem);
+});
+
 module.exports = router;

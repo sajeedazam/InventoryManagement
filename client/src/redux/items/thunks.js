@@ -14,3 +14,10 @@ export const addItemAsync = createAsyncThunk(
       return await ItemService.addItem(item.name, item.description, item.price, item.imageUrl);
     }
 );
+
+export const deleteItemAsync = createAsyncThunk(
+    'DELETE_ITEM',
+    async (itemId) => {
+      return await ItemService.deleteItem(itemId);
+    }
+);
