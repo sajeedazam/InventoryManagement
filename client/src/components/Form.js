@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteItem, addItem } from '../actions';
+// import { deleteItem, addItem } from '../actions';
+import { deleteItem, addItem } from '../redux/items/reducer';
 import ItemDetail from './PopUp';
 import ItemDeleteButton from './DeleteButton';
 import './Form.css';
@@ -14,11 +15,6 @@ export default function ItemList() {
     const [price, setPrice] = useState('');
     const [imageUrl, setImageUrl] = useState('');
     const [selectedItem, setSelectedItem] = useState(null);
-
-    const handleDeleteItem = (item) => {
-        dispatch(deleteItem(item));
-        setSelectedItem(null);
-    };
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
@@ -68,7 +64,7 @@ export default function ItemList() {
                 />
 
                 <label>Image URL:</label>
-                <input type="text" id="imageUrl" name="imageUrl" value={imageUrl}
+                <input type="text" id="imcageUrl" name="imageUrl" value={imageUrl}
                     onChange={(e) => setImageUrl(e.target.value)}
                     required
                 />
@@ -89,7 +85,7 @@ export default function ItemList() {
                         <img src={item.imageUrl} width="50" />
                         <strong> {item.name} </strong>
                         <button className="viewDetailsButton" onClick={() => setSelectedItem(item)}>View Details</button>
-                        <ItemDeleteButton item={item} onDelete={handleDeleteItem} />
+                        <ItemDeleteButton item={item}/>
                     </li>
                 ))}
             </ul>
