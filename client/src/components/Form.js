@@ -19,23 +19,26 @@ export default function ItemList() {
     const [imageUrl, setImageUrl] = useState('');
     const [selectedItem, setSelectedItem] = useState(null);
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
 
         const newItem = {
             name: itemName,
             description: description,
-            price: price,
+            price: parseFloat(price),
             imageUrl: imageUrl,
         };
 
-        // Update the items list
-        dispatch(addItemAsync(newItem));
+        try {
+            await dispatch(addItemAsync(newItem));
 
-        setItemName('');
-        setDescription('');
-        setPrice('');
-        setImageUrl('');
+            setItemName('');
+            setDescription('');
+            setPrice('');
+            setImageUrl('');
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     const handleClearForm = () => {
@@ -88,7 +91,7 @@ export default function ItemList() {
                         <img src={item.imageUrl} width="50" />
                         <strong> {item.name} </strong>
                         <button className="viewDetailsButton" onClick={() => setSelectedItem(item)}>View Details</button>
-                        <ItemDeleteButton item={item} />
+                        <ItemDeleteButton item={item._id} />
                     </li>
                 ))}
             </ul>

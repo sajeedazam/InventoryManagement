@@ -1,61 +1,69 @@
 var express = require('express');
 var router = express.Router();
-const { v4: uuid } = require('uuid');
+const mongoose = require('mongoose');
 
-var items = [
-  { id: uuid(), name: 'Hammer', description: 'Steel head and wooden handle hammer', price: 15, imageUrl: "https://th.bing.com/th/id/R.08d4c4232ad5c3b152835810d8339de9?rik=wAKL6zkubUbHMg&pid=ImgRaw&r=0" },
-  { id: uuid(), name: 'Pliers', description: 'For gripping objects', price: 15, imageUrl: 'https://cdn4.iconfinder.com/data/icons/construction-and-building-1/128/13-1024.png' },
-];
-
-/* GET items listing. */
-router.get('/', function (req, res, next) {
-  res.send(items);
+const itemSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  description: { type: String, required: true },
+  price: { type: Number, required: true },
+  imageUrl: { type: String, required: true }
 });
 
-// from cs455-express-demo
-router.get('/:itemId', function (req, res, next) {
-  const foundItem = items.find(item => item.id === req.params.itemId);
+const Item = mongoose.model('Item', itemSchema);
 
-  if (!foundItem) return res.status(404).send({ message: 'Item not found' });
-
-  return res.send(foundItem);
+mongoose.connect('mongodb+srv://m001-student:m001-mongodb-basics@sandbox.auynv35.mongodb.net/?retryWrites=true&w=majority', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 });
 
-router.post('/', function (req, res, next) {
-  if (!req.body.name || !req.body.description || !req.body.price || !req.body.imageUrl) {
-    return res.status(400).send({ message: 'Fill all fields!' })
+router.get('/', async function (req, res, next) {
+  try {
+    const items = await Item.find();
+    res.send(items);
+  } catch (error) {
+    res.status(500).send({ message: 'Error retrieving items from the database' });
   }
-
-  const item = { id: uuid(), name: req.body.name, description: req.body.description, price: req.body.price, imageUrl: req.body.imageUrl };
-  items.push(item);
-  return res.send(item);
 });
 
-router.delete('/:itemId', function (req, res, next) {
-  const itemId = req.params.itemId;
-  const deletedItem = items.find(item => item.id === itemId);
-
-  if (!deletedItem) {
-    return res.status(404).send({ message: 'Item not found' });
+router.post('/', async function (req, res, next) {
+  try {
+    const newItem = new Item(req.body);
+    const savedItem = await newItem.save();
+    res.send(savedItem);
+  } catch (error) {
+    res.status(400).send({ message: 'Failed to add item to the database' });
   }
-
-  items = items.filter(item => item.id !== itemId);
-  return res.send(deletedItem);
 });
 
-router.put('/:itemId', (req, res) => {
-  const { itemId } = req.params;
-  const { description } = req.body;
+router.delete('/:itemId', async function (req, res, next) {
+  try {
+    const itemId = req.params.itemId;
+    const deletedItem = await Item.findByIdAndDelete(itemId);
 
-  const foundItem = items.find(item => item.id === itemId);
-
-  if (!foundItem) {
-    return res.status(404).send({ message: 'Item not found' });
+    if (!deletedItem) {
+      res.status(404).send({ message: 'Item not found' });
+    } else {
+      res.send(deletedItem);
+    }
+  } catch (error) {
+    res.status(500).send({ message: 'Error deleting item from the database' });
   }
+});
 
-  foundItem.description = description;
+router.put('/:itemId', async function (req, res, next) {
+  try {
+    const itemId = req.params.itemId;
+    const update = req.body;
+    const updatedItem = await Item.findByIdAndUpdate(itemId, update, { new: true });
 
-  res.send(foundItem);
+    if (!updatedItem) {
+      res.status(404).send({ message: 'Item not found' });
+    } else {
+      res.send(updatedItem);
+    }
+  } catch (error) {
+    res.status(500).send({ message: 'Error updating item in the database' });
+  }
 });
 
 module.exports = router;

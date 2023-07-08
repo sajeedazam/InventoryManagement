@@ -6,10 +6,15 @@ import './PopUp.css';
 export default function ItemDetail({ item, onClose }) {
     const [newDescription, setNewDescription] = useState('');
     const dispatch = useDispatch();
+    const itemId = item._id;
 
-    const handleEdit = () => {
-        dispatch(editItemAsync({ itemId: item.id, description: newDescription }));
-        onClose();
+    const handleEdit = async () => {
+        try {
+            await dispatch(editItemAsync({ itemId, description: newDescription }));
+            onClose();
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     return (

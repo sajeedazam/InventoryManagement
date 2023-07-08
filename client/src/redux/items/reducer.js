@@ -1,8 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-// import { v4 as uuidv4 } from 'uuid';
 import { getItemsAsync, addItemAsync, deleteItemAsync, editItemAsync } from './thunks';
 
-// cs455-express-demo
 const REQUEST_STATE = {
     IDLE: 'IDLE',
     PENDING: 'PENDING',
@@ -23,14 +21,6 @@ const itemSlice = createSlice({
     name: 'items',
     initialState: INITIAL_STATE,
     reducers: {
-        // addItem: (state, action) => {
-        //     const newItem = { id: uuidv4(), ...action.payload };
-        //     state.items.push(newItem);
-        // },
-        // deleteItem: (state, action) => {
-        //     const itemId = action.payload.id;
-        //     state.items = state.items.filter(item => item.id !== itemId);
-        // }
     },
     extraReducers: (builder) => {
         builder
@@ -64,8 +54,8 @@ const itemSlice = createSlice({
             })
             .addCase(deleteItemAsync.fulfilled, (state, action) => {
                 state.deleteItem = REQUEST_STATE.FULFILLED;
-                const itemId = action.payload.id;
-                state.items = state.items.filter((item) => item.id !== itemId);
+                const itemId = action.payload._id;
+                state.items = state.items.filter((item) => item._id !== itemId);
             })
             .addCase(deleteItemAsync.rejected, (state, action) => {
                 state.deleteItem = REQUEST_STATE.REJECTED;
@@ -78,7 +68,7 @@ const itemSlice = createSlice({
             .addCase(editItemAsync.fulfilled, (state, action) => {
                 state.editItem = REQUEST_STATE.FULFILLED;
                 const updatedItem = action.payload;
-                const index = state.items.findIndex(item => item.id === updatedItem.id);
+                const index = state.items.findIndex(item => item._id === updatedItem._id);
                 if (index !== -1) {
                     state.items[index].description = updatedItem.description;
                 }
@@ -90,6 +80,4 @@ const itemSlice = createSlice({
     }
 });
 
-
-// export const { addItem, deleteItem } = itemSlice.actions;
 export default itemSlice.reducer;
