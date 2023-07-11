@@ -7,13 +7,13 @@ const getItems = async () => {
     return res.json();
 }
 
-const addItem = async (name, description, price, imageUrl) => {
+const addItem = async (name, sku, description, price, imageUrl) => {
     const response = await fetch('http://localhost:3001/items', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name, description, price, imageUrl })
+        body: JSON.stringify({ name, sku, description, price, imageUrl })
     });
 
     const data = await response.json();

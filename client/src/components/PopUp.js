@@ -24,6 +24,7 @@ export default function ItemDetail({ item, onClose }) {
                 X
             </button>
             <p>Name: {item.name}</p>
+            <p>SKU: {item.sku}</p>
             <p>Description: {item.description}</p>
             <p>Price: ${item.price}</p>
             <div>

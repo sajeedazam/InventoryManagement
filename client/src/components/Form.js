@@ -14,6 +14,7 @@ export default function ItemList() {
     }, []);
 
     const [itemName, setItemName] = useState('');
+    const [SKU, setSKU] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [imageUrl, setImageUrl] = useState('');
@@ -24,6 +25,7 @@ export default function ItemList() {
 
         const newItem = {
             name: itemName,
+            sku: SKU,
             description: description,
             price: parseFloat(price),
             imageUrl: imageUrl,
@@ -33,6 +35,7 @@ export default function ItemList() {
             await dispatch(addItemAsync(newItem));
 
             setItemName('');
+            setSKU('');
             setDescription('');
             setPrice('');
             setImageUrl('');
@@ -54,6 +57,12 @@ export default function ItemList() {
                 <label>Item Name:</label>
                 <input type="text" id="itemName" name="itemName" value={itemName}
                     onChange={(e) => setItemName(e.target.value)}
+                    required
+                />
+
+                <label>SKU:</label>
+                <input type="text" id="SKU" name="SKU" value={SKU}
+                    onChange={(e) => setSKU(e.target.value)}
                     required
                 />
 

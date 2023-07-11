@@ -17,7 +17,7 @@ export const addItemAsync = createAsyncThunk(
     'ADD_ITEM',
     async (item) => {
         try {
-            return await ItemService.addItem(item.name, item.description, item.price, item.imageUrl);
+            return await ItemService.addItem(item.name, item.sku, item.description, item.price, item.imageUrl);
         } catch (error) {
             throw new Error('Failed to add item to the database');
         }
