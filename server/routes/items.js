@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 const itemSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -11,8 +12,9 @@ const itemSchema = new mongoose.Schema({
 });
 
 const Item = mongoose.model('Item', itemSchema);
+const URI = process.env.MONGO_URI;
 
-mongoose.connect('mongodb+srv://m001-student:m001-mongodb-basics@sandbox.auynv35.mongodb.net/?retryWrites=true&w=majority', {
+mongoose.connect(`${URI}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });

@@ -33,12 +33,7 @@ export default function ItemList() {
 
         try {
             await dispatch(addItemAsync(newItem));
-
-            setItemName('');
-            setSKU('');
-            setDescription('');
-            setPrice('');
-            setImageUrl('');
+            handleClearForm();
         } catch (error) {
             console.error(error);
         }
@@ -46,6 +41,7 @@ export default function ItemList() {
 
     const handleClearForm = () => {
         setItemName('');
+        setSKU('');
         setDescription('');
         setPrice('');
         setImageUrl('');

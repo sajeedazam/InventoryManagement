@@ -1,0 +1,15 @@
+{
+  "name": "455-assignments",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install-server": "cd servre && npm install",
+    "start-server": "cd server && npm start",
+    "install-client": "cd client && npm install",
+    "start-client": "cd client && npm start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
