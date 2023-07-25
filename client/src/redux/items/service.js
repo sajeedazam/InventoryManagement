@@ -1,5 +1,5 @@
 const getItems = async () => {
-    const res = await fetch('http://localhost:3001/items',
+    const res = await fetch('https://inventory-management-eps2.onrender.com/items',
         {
             method: 'GET'
         });
@@ -8,7 +8,7 @@ const getItems = async () => {
 }
 
 const addItem = async (name, sku, description, price, imageUrl) => {
-    const response = await fetch('http://localhost:3001/items', {
+    const response = await fetch('https://inventory-management-eps2.onrender.com/items', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -26,7 +26,7 @@ const addItem = async (name, sku, description, price, imageUrl) => {
 };
 
 const deleteItem = async (itemId) => {
-    const response = await fetch(`http://localhost:3001/items/${itemId}`, {
+    const response = await fetch(`https://inventory-management-eps2.onrender.com/items/${itemId}`, {
         method: 'DELETE'
     });
 
@@ -41,7 +41,7 @@ const deleteItem = async (itemId) => {
 }
 
 const editItem = async (itemId, description) => {
-    const response = await fetch(`http://localhost:3001/items/${itemId}`, {
+    const response = await fetch(`https://inventory-management-eps2.onrender.com/items/${itemId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
