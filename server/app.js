@@ -9,7 +9,10 @@ var itemsRouter = require('./routes/items');
 
 var app = express();
 
-app.use(cors());
+const corsOptions = {
+    origin: "https://inventory-management-sajeedazam.onrender.com"
+}
+app.use(cors(corsOptions));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
